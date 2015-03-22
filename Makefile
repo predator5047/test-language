@@ -14,8 +14,10 @@ all: $(TARGET)
 
 $(TARGET): $(OBJS)
 
-main.o parser.o lexer.o: lexer.h parser.h
-ast.o: lexer.h
+main.o: lexer.h parser.h
+parser.o: parser.h lexer.h
+lexer.o: lexer.h
+ast.o: ast.h lexer.h
 
 .PHONY: clean
 clean:
