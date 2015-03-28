@@ -6,9 +6,9 @@ TARGET := foo
 .PHONY: all clean
 
 all: $(TARGET)
-	$(CXX) $(LDFLAGS) $(OBJS) -o $(TARGET)
 
 $(TARGET): $(OBJS)
+	$(CXX) $(LDFLAGS) $(OBJS) -o $(TARGET)
 
 clean:
 	$(RM) $(TARGET) $(OBJS) $(DEPS)
