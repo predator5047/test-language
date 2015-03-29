@@ -1,4 +1,6 @@
 #include "parser.h"
+#include "token.h"
+#include "ast.h"
 
 Parser::Parser(const std::string& file) : lex(file) {
 
