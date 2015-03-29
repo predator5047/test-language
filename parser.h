@@ -1,8 +1,9 @@
 #include "lexer.h"
-#include "ast.h"
 
 #ifndef PARSER_H
 #define PARSER_H
+
+struct Expression;
 
 class Parser {
 private:
