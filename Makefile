@@ -1,5 +1,5 @@
 CXX := g++
-CXXFLAGS := -Wall -Wextra -std=c++11 -g -Werror -MMD
+CXXFLAGS := -Wall -Wextra -std=c++11 -g -Werror -pipe -MP -MMD
 OBJS := main.o lexer.o parser.o ast.o
 DEPS := $(OBJS:%.o=%.d)
 TARGET := foo
