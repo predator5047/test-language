@@ -1,22 +1,58 @@
-
 #include "parser.h"
 
 Parser::Parser(const std::string& file) : lex(file) {
 
 }
 
-int Parser::AddExp() {
-	return 0;
+Expression* Parser::Term() {
+	Expression *left = Factor(), *right;
+	TokenId op_id = lex.PeekToken().Id;
+
+	while (op_id == PLUS || op_id == MINUS) {
+		lex.NextToken();
+		right = Factor();
+
+		BinaryOperator *temp = new BinaryOperator(left, right, op_id);
+		left = temp;
+
+		op_id = lex.PeekToken().Id;
+	}
+
+	return left;
 }
 
-int Parser::MultExp() {
-	return 0;
+Expression* Parser::Factor() {
+	Expression *left = Primary(), *right;
+	TokenId op_id = lex.PeekToken().Id;
+
+	while (op_id == MULT || op_id == DIV) {
+		lex.NextToken();
+		right = Primary();
+
+		BinaryOperator *temp = new BinaryOperator(left, right, op_id);
+		left = temp;
+
+		op_id = lex.PeekToken().Id;
+	}
+
+	return left;
 }
 
-int Parser::Exp() {
-	return 0;
-}
+Expression* Parser::Primary() {
+	Expression *expr = NULL;
 
-int Parser::Eval() {
-	return 0;
+	if (lex.PeekToken().Id == NUMBER) {
+		expr = new Constant(lex.NextToken());	
+	} else if (lex.PeekToken().Id == MINUS) {
+		lex.NextToken();
+		expr = new UnaryOperator(Primary(), MINUS);
+	} else if (lex.PeekToken().Id == LPAREN) {
+		lex.NextToken();
+		
+		expr = Term();
+
+		lex.NextToken();
+	}
+	
+	return expr;
 }

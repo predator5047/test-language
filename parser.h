@@ -1,4 +1,5 @@
 #include "lexer.h"
+#include "ast.h"
 
 #ifndef PARSER_H
 #define PARSER_H
@@ -10,10 +11,9 @@ private:
 public:
 	Parser(const std::string &file);
 
-	int AddExp();
-	int MultExp();
-	int Exp(); 
-	int Eval();
+	Expression* Term();
+	Expression* Factor();
+	Expression* Primary(); 
 };
 
 #endif

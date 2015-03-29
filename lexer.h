@@ -6,7 +6,7 @@
 
 enum TokenId {
 	NUMBER, IDENT, EQ, PLUS, MINUS, DIV, MULT, SEMICOLON,
-	UNKOWN, 
+	UNKOWN, LPAREN, RPAREN
 };
 
 const int MAX_INDENT_LEN = 200;
@@ -30,7 +30,7 @@ public:
 
 	int GetNoSp();
 
-	Token Peek();
+	Token PeekToken();
 
 	Token NextToken();
 };

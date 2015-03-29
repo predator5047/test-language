@@ -2,20 +2,42 @@
 #define AST_H
 
 #include "lexer.h"
-#include <memory>
 
-struct Expr {
-	virtual ~Expr();
+struct Node {
+	virtual ~Node();
 };
 
-struct BinaryExp : Expr {
-	std::unique_ptr<Expr> Left, Right;
+struct Expression {
+	virtual ~Expression();
+};
+
+struct Variable : Expression {
+	std::string Name;
+};
+
+struct BinaryOperator : Expression {
+	Expression *Left, *Right;
 	TokenId Op;
+
+	BinaryOperator(Expression *left, Expression *right, TokenId op);
+	~BinaryOperator();
 };
 
-struct PrimaryExp : Expr {
+struct UnaryOperator : Expression {
+	Expression *Expr;
+	TokenId Op;
+	UnaryOperator(Expression *exp, TokenId op);
+	~UnaryOperator();
+};
+
+struct Constant : Expression {
 	Token Tok;	
+	Constant(Token tok);
 };
 
+struct Assigment {
+	Variable *Var;
+	~Assigment();
+};
 
 #endif

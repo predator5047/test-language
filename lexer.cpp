@@ -75,7 +75,7 @@ Token Lexer::NextToken() {
 }
 
 
-Token Lexer::Peek() {
+Token Lexer::PeekToken() {
 	std::streampos pos = fin.tellg();
 	Token tok = NextToken();
 
